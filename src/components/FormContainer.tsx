@@ -1,7 +1,7 @@
 import React from "react";
 interface Props {
   children: React.ReactNode;
-  submitAction: () => void;
+  submitAction: React.FormEventHandler<HTMLFormElement>;
 }
 const FormContainer: React.FC<Props> = ({ children, submitAction }) => {
   return (

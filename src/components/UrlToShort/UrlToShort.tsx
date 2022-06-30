@@ -7,7 +7,9 @@ import TextInput from "../TextInput";
 const UrlToShort = () => {
   const [url, setUrl] = useState<string>("");
 
-  function handleSubmit() {}
+  function handleSubmit(e: React.FormEvent<HTMLFormElement>): void {
+    e.preventDefault();
+  }
 
   return (
     <MainContainer>
@@ -15,9 +17,9 @@ const UrlToShort = () => {
         <TextInput
           state={url}
           setStateAction={setUrl}
-          label="Enter your Url below!"
+          label="Enter your URL below!"
         />
-        <MainBtn>Shorten Url</MainBtn>
+        <MainBtn submitType={true}>Shorten URL</MainBtn>
       </FormContainer>
     </MainContainer>
   );
