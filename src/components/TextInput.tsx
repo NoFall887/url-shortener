@@ -4,9 +4,15 @@ interface Props {
   state: string;
   setStateAction: React.Dispatch<React.SetStateAction<string>>;
   label: string;
+  disabled: boolean;
 }
 
-const TextInput: React.FC<Props> = ({ state, setStateAction, label }) => {
+const TextInput: React.FC<Props> = ({
+  state,
+  setStateAction,
+  label,
+  disabled,
+}) => {
   return (
     <>
       <label
@@ -16,7 +22,7 @@ const TextInput: React.FC<Props> = ({ state, setStateAction, label }) => {
         {label}
       </label>
       <input
-        className=" border-violet-500 border-2 focus:outline-none focus:shadow-outline mb-6 p-2 font-medium text-lg"
+        className=" border-violet-500 border-2 focus:outline-none focus:shadow-outline disabled:opacity-60 p-2 font-medium text-lg"
         name="url-input"
         id="url-input"
         type={"text"}
@@ -24,6 +30,7 @@ const TextInput: React.FC<Props> = ({ state, setStateAction, label }) => {
         value={state}
         placeholder="Enter url..."
         required
+        disabled={disabled}
       />
     </>
   );

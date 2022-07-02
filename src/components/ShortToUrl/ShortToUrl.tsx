@@ -6,7 +6,7 @@ import TextInput from "../TextInput";
 
 const ShortToUrl: React.FC = () => {
   const [url, setUrl] = useState<string>("");
-
+  const [isLoading, setIsLoading] = useState<boolean>(false);
   function handleSubmit(): void {}
   return (
     <MainContainer>
@@ -15,6 +15,7 @@ const ShortToUrl: React.FC = () => {
           label="Enter shortened URL below!"
           setStateAction={setUrl}
           state={url}
+          disabled={isLoading}
         />
         <MainBtn submitType={true}>Check URL</MainBtn>
       </FormContainer>

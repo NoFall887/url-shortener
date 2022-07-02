@@ -1,3 +1,4 @@
+import axios from "axios";
 import React, { createContext, useState } from "react";
 import Master from "./components/master/Master";
 import ShortToUrl from "./components/ShortToUrl/ShortToUrl";
@@ -8,7 +9,11 @@ interface StateData {
   setState?: React.Dispatch<React.SetStateAction<number>>;
 }
 
+// active tab context
 export const activeTabIndexContext = createContext<StateData>({});
+
+// axios base url
+axios.defaults.baseURL = "http://localhost:5000/api";
 
 function App() {
   const [activeTabIndex, setActiveTabIndex] = useState<number>(0);
