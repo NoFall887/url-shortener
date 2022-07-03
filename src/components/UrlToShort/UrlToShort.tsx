@@ -28,10 +28,11 @@ const UrlToShort = () => {
       url: string | null;
     }
     axios
-      .post("/shortenUrl", { url: url })
+      .post("/createShortenedUrl", { url: url })
       .then((response: AxiosResponse<Response>) => {
         setIsLoading(false);
         if (response.data.success) {
+          console.log(response.data.url);
           setShortenedUrl({ shortenedUrl: response.data.url! });
           return;
         }

@@ -6,7 +6,7 @@ export const isValidUrl = (req: Request, res: Response, next: NextFunction) => {
   }
   const { url }: Url = req.body;
   var urlPattern: RegExp = new RegExp(
-    "^(https?:\\/\\/)?" + // validate protocol
+    "^(http(s)?:\\/\\/)?" + // validate protocol
       "((([a-z\\d]([a-z\\d-]*[a-z\\d])*)\\.)+[a-z]{2,}|" + // validate domain name
       "((\\d{1,3}\\.){3}\\d{1,3}))" + // validate OR ip (v4) address
       "(\\:\\d+)?(\\/[-a-z\\d%_.~+]*)*" + // validate port and path
@@ -22,3 +22,8 @@ export const isValidUrl = (req: Request, res: Response, next: NextFunction) => {
   }
   res.json({ success: false, message: "Invalid Url", url: null });
 };
+
+export function hasProtocol(url: string) {
+  var urlPattern = new RegExp("^(http(s)?:\\/\\/)");
+  return urlPattern.test(url);
+}

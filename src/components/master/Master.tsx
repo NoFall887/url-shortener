@@ -8,7 +8,7 @@ interface Props {
 const Master: React.FC<Props> = ({ children }) => {
   return (
     <div className="flex justify-center flex-col items-center gap-4 min-h-screen w-full bg-violet-100">
-      <h1 className="text-purple-700 text-center font-bold font-sans text-5xl mt-2 mb-8">
+      <h1 className="text-purple-700 text-center font-bold font-sans text-5xl mt-2">
         Url Shortener
       </h1>
       <NavsButtons />

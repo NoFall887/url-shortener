@@ -21,7 +21,7 @@ const NavsButtons: React.FC = () => {
   const activeTabIndex = useContext(activeTabIndexContext);
 
   return (
-    <nav className="flex w-full gap-2 justify-center mb-8">
+    <nav className="flex w-full gap-2 justify-center mb-2">
       {navList.map<React.ReactNode>((navItem, index): React.ReactNode => {
         return (
           <MainBtn action={() => activeTabIndex.setState!(index)} key={index}>

@@ -10,7 +10,7 @@ export async function connect(dbURI: string) {
 }
 
 const UrlSchema = new mongoose.Schema({
-  shorted_url: {
+  url_id: {
     type: "string",
     required: true,
   },
@@ -20,31 +20,50 @@ const UrlSchema = new mongoose.Schema({
   },
 });
 
-export const UrlModel = mongoose.model("Url", UrlSchema);
+export const UrlModel = mongoose.model("urls", UrlSchema);
 
-interface createShortenedUrlReturns {
+// CREATE SHORTENED URL
+export interface CreateReadReturns {
   success: boolean;
   message: string;
   url: string | null;
 }
 export async function createShortenedUrl(
   url: string,
-  shortenedUrl: string
-): Promise<createShortenedUrlReturns> {
-  console.log(shortenedUrl);
-  var result: createShortenedUrlReturns;
+  urlId: string
+): Promise<CreateReadReturns> {
+  console.log(urlId);
+  var result: CreateReadReturns;
 
-  await UrlModel.create({ url: url, shorted_url: shortenedUrl })
+  await UrlModel.create({ url_id: urlId, url: url })
     .then((doc) => {
       result = {
         success: true,
         message: "successfully created",
-        url: shortenedUrl,
+        url: urlId,
       };
     })
     .catch((err) => {
       result = { success: false, message: err.message, url: null };
     });
 
+  return result!;
+}
+
+// GET REAL URL
+export async function getRealUrl(urlId: string): Promise<CreateReadReturns> {
+  var result: CreateReadReturns;
+  await UrlModel.findOne({ url_id: urlId })
+    .exec()
+    .then((doc) => {
+      if (doc === null) {
+        result = { success: false, message: "not found", url: null };
+        return;
+      }
+      result = { success: true, message: "url found", url: doc.url };
+    })
+    .catch((err) => {
+      result = { success: false, message: err.message, url: null };
+    });
   return result!;
 }
