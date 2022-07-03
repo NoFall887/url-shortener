@@ -36,11 +36,15 @@ app.post("/api/createShortenedUrl", async (req, res) => {
   return res.json(result);
 });
 
-app.get("/api/checkUrl", async (req, res) => {
-  var url = req.urlString;
-
-  var result: CreateReadReturns = await getRealUrl(url);
+app.post("/api/checkUrl", async (req, res) => {
+  const url = req.urlString;
+  const splittedUrl = url.split("/");
+  const urlId = splittedUrl[splittedUrl.length - 1];
+  var result: CreateReadReturns = await getRealUrl(urlId);
   if (result.success) {
+    if (!hasProtocol(result.url)) {
+      result.url = "http://" + result.url;
+    }
     return res.json(result);
   }
   return res.json(result);
@@ -51,7 +55,7 @@ app.get("/:urlId", async (req, res) => {
   const result: CreateReadReturns = await getRealUrl(shortenedUrl);
   if (result.success) {
     if (!hasProtocol(result.url)) {
-      result.url = "https://" + result.url;
+      result.url = "http://" + result.url;
     }
 
     return res.redirect(result.url);

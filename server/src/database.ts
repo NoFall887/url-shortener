@@ -57,7 +57,7 @@ export async function getRealUrl(urlId: string): Promise<CreateReadReturns> {
     .exec()
     .then((doc) => {
       if (doc === null) {
-        result = { success: false, message: "not found", url: null };
+        result = { success: false, message: "Url Not Found", url: null };
         return;
       }
       result = { success: true, message: "url found", url: doc.url };
